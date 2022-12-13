@@ -86,3 +86,16 @@ $ ng g service calculator/services/calculator
 CREATE src/app/calculator/services/calculator.service.spec.ts 
 CREATE src/app/calculator/services/calculator.service.ts 
 ```
+
+#### Elements of an Angular application
+
+- Módulos
+- Componentes
+- Templates
+- Metadata
+- Data binding
+- Diretivas
+- Serviços
+- Injeção de dependências
+
+![image](https://user-images.githubusercontent.com/86172286/207194739-3cfaf949-21ea-4c6f-b372-38aaa63cfd1c.png)
