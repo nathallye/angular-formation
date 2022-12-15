@@ -93,7 +93,7 @@ CREATE src/app/calculator/services/calculator.service.ts
 - Components
 - Templates
 - Metadata
-- data binding
+- Data binding
 - Directives
 - Services
 - Dependency injection
@@ -131,3 +131,11 @@ Angular implements a dependency injection mechanism and runs it at application s
 - **Modules:** Another important element is the modules. They help to make our application more organized. 
 
 It is possible to create modules that group components, services and other elements by some similarity.
+
+### Installing bootstrap
+
+- Bootstrap installation can be done with the following command:
+
+```
+npm install --save bootstrap@3
+```
