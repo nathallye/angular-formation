@@ -132,6 +132,26 @@ Angular implements a dependency injection mechanism and runs it at application s
 
 It is possible to create modules that group components, services and other elements by some similarity.
 
+### Important!
+
+Angular in its latest version enables by default the **strict mode(strict)** and **noPropertyAccessFromIndexSignature** of Typescript, and this mode generates some incompatibilities with the code created here because it makes many restrictions on the creation of objects.
+
+To avoid compilation errors due to restricted mode, it is recommended to disable it in the project.
+
+To disable **strict** mode and **noPropertyAccessFromIndexSignature** in Angular, edit the `tsconfig.json` file, located at the root of the project, and change the following lines from:
+
+``` JSON
+"strict": true,
+"noPropertyAccessFromIndexSignature": true
+```
+
+For:
+
+``` JSON
+"strict": false,
+"noPropertyAccessFromIndexSignature": false
+```
+
 ### Installing bootstrap
 
 - Bootstrap installation can be done with the following command:
