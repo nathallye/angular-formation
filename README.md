@@ -222,3 +222,40 @@ npm install --save bootstrap@3
   "src/styles.css",
   "./node_modules/bootstrap/dist/css/bootstrap.min.css"
 ```
+
+### Creating the Tasks module
+
+- The module is created using the following command:
+
+```
+$ ng g module tasks
+
+CREATE src/app/tasks/tasks.module.ts
+```
+
+### Creating the Task model
+
+- In the app/tasks directory, we will create a shared folder called "shared" and inside it a `task.model.ts` file to define a task model.
+
+- In this `task.model.ts` file we will define the attributes that the task will have:
+
+``` TS
+export class Task {
+  constructor(
+    public id?: number,
+    public name?: string,
+    public completed?: boolean
+  ) {}
+}
+```
+
+### Creating the Task service
+
+- The service is created using the following command:
+
+```
+$ ng g service tasks/shared/task
+
+CREATE src/app/tasks/shared/task.service.spec.ts 
+CREATE src/app/tasks/shared/task.service.ts 
+```
