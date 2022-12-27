@@ -14,7 +14,7 @@ $ npm i -g @angular/cli
 $ ng version
 ```
 
-## First project: Hello world!
+## FIRST PROJECT: HELLO WORLD!
 
 - We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
 
@@ -33,7 +33,7 @@ $ cd hello-world && ng serve
 $ cd hello-world && npm start
 ```
 
-## Project Calculator
+## PROJECT CALCULATOR
 
 - We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
 
@@ -168,7 +168,7 @@ npm install --save bootstrap@3
   "./node_modules/bootstrap/dist/css/bootstrap.min.css"
 ```
 
-## Project Todo List
+## PROJECT TODO LIST
 
 - We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
 
