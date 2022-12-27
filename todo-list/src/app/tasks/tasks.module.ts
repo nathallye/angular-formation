@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TaskService } from './shared';
+import { ListTasksComponent } from './list-tasks';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ListTasksComponent
+  ],
   imports: [
     CommonModule
   ],
