@@ -235,7 +235,7 @@ CREATE src/app/tasks/tasks.module.ts
 
 ### Creating the Task model
 
-- In the app/tasks directory, we will create a shared folder called "shared" and inside it a `task.model.ts` file to define a task model.
+- In the `src/app/tasks` directory, we will create a shared folder called "shared" and inside it a `task.model.ts` file to define a task model.
 
 - In this `task.model.ts` file we will define the attributes that the task will have:
 
@@ -344,3 +344,37 @@ CREATE src/app/tasks/list-tasks/list-tasks.component.ts
 UPDATE src/app/tasks/list-tasks.module.ts 
 ```
 
+### Registering task listing routes
+
+- In the `src/app/tasks` directory we will create the `tasks-routing.module.ts` file and in it we will define the routes related to the tasks:
+
+``` TS
+import { Routes } from '@angular/router';
+
+import { ListTasksComponent } from './list-tasks';
+
+export const TasksRoutes: Routes = [
+	{ path: 'tarefas', redirectTo: 'tarefas/listar' },
+
+	{ path: 'tarefas/listar', component: ListTasksComponent }
+];
+```
+
+- Next, let's import it into the app's main `app-routing.module.ts` routing module:
+
+``` JS
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { TasksRoutes } from './tasks';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'tarefas/listar', pathMatch: 'full' },
+  ...TasksRoutes
+]
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
