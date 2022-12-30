@@ -223,6 +223,25 @@ npm install --save bootstrap@3
   "./node_modules/bootstrap/dist/css/bootstrap.min.css"
 ```
 
+- Another option is to import the bootstrap directly into the `index.html` file:
+
+``` HTML
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Gerenciador de Tarefas</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+```
+
 ### Creating the Tasks module
 
 - The module is created using the following command:
@@ -377,4 +396,110 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+```
+
+### Implementing the task list:
+
+- First, let's define the html with the bootstrap classes in `list-tasks.component.html`:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <a
+           class="btn btn-xs btn-success">
+           <span class="glyphicon glyphicon-plus"
+             aria-hidden="true"></span> Novo
+        </a>
+    </th>
+    </tr>
+    <tr>
+      <td>
+
+      </td>
+      <td style="width: 70px" class="text-center">
+        <input
+          type="checkbox">
+      </td>
+      <td class="text-center" style="width: 200px">
+        <a
+          title="Editar" alt="Editar"
+          class="btn btn-xs btn-info">
+          <span class="glyphicon glyphicon-pencil"
+            aria-hidden="true"></span> Editar
+        </a>
+        <a href="#" title="Remover" alt="Remover"
+
+          class="btn btn-xs btn-danger">
+          <span class="glyphicon glyphicon-remove"
+            aria-hidden="true"></span> Remover
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Nenhuma tarefa cadastrada.</p>
+```
+
+- Next, we'll import the necessary modules (RouterModule and FormsModule) into `tasks.module.ts`:
+
+``` TS
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { TaskService } from './shared';
+import { ListTasksComponent } from './list-tasks';
+
+@NgModule({
+  declarations: [
+    ListTasksComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule
+  ],
+  providers: [
+    TaskService
+  ]
+})
+
+export class TasksModule { }
+```
+
+- Once this is done, in `list-tasks.component.ts` we can define the methods that will list the tasks:
+
+``` TS
+import { Component, OnInit } from '@angular/core';
+
+import { Task, TaskService } from './../shared';
+
+@Component({
+  selector: 'app-list-tasks',
+  templateUrl: './list-tasks.component.html',
+  styleUrls: ['./list-tasks.component.css']
+})
+
+export class ListTasksComponent implements OnInit {
+
+  tasks: Task[]
+
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit() { // chamado no angular logo após a inicialização do construtor
+    this.tasks = this.getAll();
+  }
+
+  getAll(): Task[] {
+    return this.taskService.getAll();
+  }
+}
 ```
