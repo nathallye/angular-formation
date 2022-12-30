@@ -13,13 +13,19 @@
         </a>
     </th>
     </tr>
-    <tr>
-      <td>
-
+    <tr *ngFor="let task of tasks"> <!-- *ngFor - Diretiva do angular que está dentro do pacote FormsModule - essa diretiva irá percorrer cada elemento de uma lista -->
+      <td [class.success]="!task.completed"> <!-- colchetes [] - operador de atribuição do angular, nesse caso, se a tarefa NÃO(!) estiver concluida ele vai atribuir a class success do bootstrap a esse elemento, deixando o fundo verde -->
+        {{ task.name }} <!-- chaves duplas {} - exibe os valores de dentro das variáveis -->
       </td>
       <td style="width: 70px" class="text-center">
         <input
-          type="checkbox">
+          type="checkbox"
+          [value]="task.id"
+          [checked]="task.completed">
+          <!-- colchetes [] - operador de atribuição do angular
+            [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox
+            [checked]="task.completed" - nesse caso ele irá marcar o checkbox com o "check" se a tarefa estiver completa, ou seja, completed for true
+          -->
       </td>
       <td class="text-center" style="width: 200px">
         <a
@@ -39,4 +45,4 @@
   </tbody>
 </table>
 
-<p>Nenhuma tarefa cadastrada.</p>
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->

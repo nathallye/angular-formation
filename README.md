@@ -503,3 +503,58 @@ export class ListTasksComponent implements OnInit {
   }
 }
 ```
+
+### Implementing the task list - part II:
+
+- First, let's make a change to `list-tasks.component.html` by adding the `*ngFor` directive to the list of tasks:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <a
+           class="btn btn-xs btn-success">
+           <span class="glyphicon glyphicon-plus"
+             aria-hidden="true"></span> Novo
+        </a>
+    </th>
+    </tr>
+    <tr *ngFor="let task of tasks"> <!-- *ngFor - Diretiva do angular que está dentro do pacote FormsModule - essa diretiva irá percorrer cada elemento de uma lista -->
+      <td [class.success]="!task.completed"> <!-- colchetes [] - operador de atribuição do angular, nesse caso, se a tarefa NÃO(!) estiver concluida ele vai atribuir a class success do bootstrap a esse elemento, deixando o fundo verde -->
+        {{ task.name }} <!-- chaves duplas {} - exibe os valores de dentro das variáveis -->
+      </td>
+      <td style="width: 70px" class="text-center">
+        <input
+          type="checkbox"
+          [value]="task.id"
+          [checked]="task.completed">
+          <!-- colchetes [] - operador de atribuição do angular
+            [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox
+            [checked]="task.completed" - nesse caso ele irá marcar o checkbox com o "check" se a tarefa estiver completa, ou seja, completed for true
+          -->
+      </td>
+      <td class="text-center" style="width: 200px">
+        <a
+          title="Editar" alt="Editar"
+          class="btn btn-xs btn-info">
+          <span class="glyphicon glyphicon-pencil"
+            aria-hidden="true"></span> Editar
+        </a>
+        <a href="#" title="Remover" alt="Remover"
+
+          class="btn btn-xs btn-danger">
+          <span class="glyphicon glyphicon-remove"
+            aria-hidden="true"></span> Remover
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
+```
