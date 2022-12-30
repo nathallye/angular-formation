@@ -621,3 +621,44 @@ export const TasksRoutes: Routes = [
 <p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
 ```
 
+### Creating the Register Task HTML interface
+
+- In `register-task.component.html` let's add the following code:
+
+``` HTML
+<h1>Cadastrar tarefa</h1>
+
+<div class="well">
+  <form>
+    <div class="form-group">
+      <label for="nome">Tarefa:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        name="nome"
+        minlength="5"
+        required>
+      <div class="alert alert-danger">
+        <div>
+          Digite a tarefa.
+        </div>
+        <div>
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input
+        type="submit"
+        class="btn btn-success"
+        value="Cadastrar">
+      <a
+        class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left"
+          aria-hidden="true"></span> Voltar
+      </a>
+    </div>
+  </form>
+</div>
+```
