@@ -416,8 +416,9 @@ export class AppRoutingModule { }
            <span class="glyphicon glyphicon-plus"
              aria-hidden="true"></span> Novo
         </a>
-    </th>
+      </th>
     </tr>
+    
     <tr>
       <td>
 
@@ -522,8 +523,9 @@ export class ListTasksComponent implements OnInit {
            <span class="glyphicon glyphicon-plus"
              aria-hidden="true"></span> Novo
         </a>
-    </th>
+      </th>
     </tr>
+
     <tr *ngFor="let task of tasks"> <!-- *ngFor - Diretiva do angular que está dentro do pacote FormsModule - essa diretiva irá percorrer cada elemento de uma lista -->
       <td [class.success]="!task.completed"> <!-- colchetes [] - operador de atribuição do angular, nesse caso, se a tarefa NÃO(!) estiver concluida ele vai atribuir a class success do bootstrap a esse elemento, deixando o fundo verde -->
         {{ task.name }} <!-- chaves duplas {} - exibe os valores de dentro das variáveis -->
@@ -572,3 +574,50 @@ CREATE src/app/tasks/register-task/register-task.component.spec.ts
 CREATE src/app/tasks/register-task/register-task.component.ts 
 UPDATE src/app/tasks/register-task.module.ts 
 ```
+
+### Registering task registration routes
+
+- In `tasks-routing.module.ts` let's add the following route:
+
+``` TS
+import { Routes } from '@angular/router';
+
+import { ListTasksComponent } from './list-tasks';
+import { RegisterTaskComponent } from './register-task';
+
+export const TasksRoutes: Routes = [
+	{ path: 'tarefas', redirectTo: 'tarefas/listar' },
+
+	{ path: 'tarefas/listar', component: ListTasksComponent },
+
+  { path: 'tarefas/cadastrar', component: RegisterTaskComponent }
+];
+```
+
+### Adding action to create new task button
+
+- First, let's make a change to the `list-tasks.component.html` file by adding a route redirect with the `routerLink` in the `a` element:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <a [routerLink]="['/tarefas/cadastrar']"
+           class="btn btn-xs btn-success">
+           <span class="glyphicon glyphicon-plus"
+             aria-hidden="true"></span> Novo
+        </a>
+      </th>
+    </tr>
+    <!--[...]-->
+  </tbody>
+</table>
+
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
+```
+
