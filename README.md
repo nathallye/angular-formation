@@ -558,3 +558,17 @@ export class ListTasksComponent implements OnInit {
 
 <p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
 ```
+
+### Creating the Register Task component
+
+- The component is created using the following command:
+
+```
+$ ng g component tasks/register-task
+
+CREATE src/app/tasks/register-task/register-task.component.css
+CREATE src/app/tasks/register-task/register-task.component.html
+CREATE src/app/tasks/register-task/register-task.component.spec.ts
+CREATE src/app/tasks/register-task/register-task.component.ts 
+UPDATE src/app/tasks/register-task.module.ts 
+```
