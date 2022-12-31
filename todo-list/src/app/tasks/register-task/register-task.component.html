@@ -1,21 +1,27 @@
 <h1>Cadastrar tarefa</h1>
 
 <div class="well">
-  <form>
+  <form #formTask="ngForm"> <!-- Vinculando o componente ao form -->
     <div class="form-group">
-      <label for="nome">Tarefa:</label>
+      <label for="name">Tarefa:</label>
       <input
         type="text"
         class="form-control"
-        id="nome"
-        name="nome"
+        id="name"
+        name="name"
+        [(ngModel)]="task.name"
+        #name="ngModel"
         minlength="5"
-        required>
-      <div class="alert alert-danger">
-        <div>
+        required> <!--
+          [(ngModel)]="task.name" - vai garantir tanto no form quanto no componente que os valores sejam os mesmos;
+          #name="ngModel" - variável local para representar esse campo de texto(input);
+        -->
+      <div *ngIf="name.errors && (name.dirty || name.touched)"
+        class="alert alert-danger"> <!-- Se possuir erros, irá exibi-los -->
+        <div [hidden]="!name.errors.required"> <!-- se o input name NÃO(!) possuir errors do tipo required irá esconder a mensagem -->
           Digite a tarefa.
         </div>
-        <div>
+        <div [hidden]="!name.errors.minlength"> <!-- Se o input name NÃO(!) possuir errors do tipo minlength irá esconder a mensagem -->
           A tarefa deve conter ao menos 5 caracteres.
         </div>
       </div>
@@ -24,8 +30,13 @@
       <input
         type="submit"
         class="btn btn-success"
-        value="Cadastrar">
-      <a
+        (click)="create()"
+        value="Cadastrar"
+        [disabled]="!formTask.form.valid"> <!--
+          (click)="create()" - operador de eventos, quando o botão for clicado o evento click erá chamado e irá acionar o método create();
+          [disabled]="!formTask.form.valid" - Enquanto o formulário possuir erros de validação(!formTask.form.valid), vai ficar desabilitado o botão Cadastrar;
+        -->
+      <a [routerLink]="['/tarefas/listar']"
         class="btn btn-default">
         <span class="glyphicon glyphicon-chevron-left"
           aria-hidden="true"></span> Voltar

@@ -23,9 +23,10 @@
           type="checkbox"
           [value]="task.id"
           [checked]="task.completed">
-          <!-- colchetes [] - operador de atribuição do angular
-            [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox
-            [checked]="task.completed" - nesse caso ele irá marcar o checkbox com o "check" se a tarefa estiver completa, ou seja, completed for true
+          <!--
+            colchetes [] - operador de atribuição do angular;
+            [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox;
+            [checked]="task.completed" - nesse caso ele irá marcar o checkbox com o "check" se a tarefa estiver completa, ou seja, completed for true;
           -->
       </td>
       <td class="text-center" style="width: 200px">
@@ -46,4 +47,4 @@
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->

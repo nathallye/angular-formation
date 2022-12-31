@@ -398,7 +398,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-### Implementing the task list:
+### Implementing the Task List:
 
 - First, let's define the html with the bootstrap classes in `list-tasks.component.html`:
 
@@ -505,9 +505,9 @@ export class ListTasksComponent implements OnInit {
 }
 ```
 
-### Implementing the task list - part II:
+### Implementing the Task List - part II:
 
-- First, let's make a change to `list-tasks.component.html` by adding the `*ngFor` directive to the list of tasks:
+- Now, let's make a change to `list-tasks.component.html` by adding the `*ngFor` and `ngIf` directives to the list of tasks:
 
 ``` HTML
 <h1>Tarefas</h1>
@@ -535,9 +535,10 @@ export class ListTasksComponent implements OnInit {
           type="checkbox"
           [value]="task.id"
           [checked]="task.completed">
-          <!-- colchetes [] - operador de atribuição do angular
-            [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox
-            [checked]="task.completed" - nesse caso ele irá marcar o checkbox com o "check" se a tarefa estiver completa, ou seja, completed for true
+          <!-- 
+            colchetes [] - operador de atribuição do angular;
+            [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox;
+            [checked]="task.completed" - nesse caso ele irá marcar o checkbox com o "check" se a tarefa estiver completa, ou seja, completed for true;
           -->
       </td>
       <td class="text-center" style="width: 200px">
@@ -558,7 +559,7 @@ export class ListTasksComponent implements OnInit {
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
 ```
 
 ### Creating the Register Task component
@@ -618,12 +619,12 @@ export const TasksRoutes: Routes = [
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0-->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
 ```
 
-### Creating the Register Task HTML interface
+### Implementing the Register Task
 
-- In `register-task.component.html` let's add the following code:
+- First, let's define the html with the bootstrap classes in `register-task.component.html`:
 
 ``` HTML
 <h1>Cadastrar tarefa</h1>
@@ -631,12 +632,12 @@ export const TasksRoutes: Routes = [
 <div class="well">
   <form>
     <div class="form-group">
-      <label for="nome">Tarefa:</label>
+      <label for="name">Tarefa:</label>
       <input
         type="text"
         class="form-control"
-        id="nome"
-        name="nome"
+        id="name"
+        name="name"
         minlength="5"
         required>
       <div class="alert alert-danger">
@@ -654,6 +655,92 @@ export const TasksRoutes: Routes = [
         class="btn btn-success"
         value="Cadastrar">
       <a
+        class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left"
+          aria-hidden="true"></span> Voltar
+      </a>
+    </div>
+  </form>
+</div>
+```
+
+- Once this is done, in `register-task.component.ts` we can define the methods that will register the task:
+
+``` TS
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { Task, TaskService } from './../shared';
+
+@Component({
+  selector: 'app-register-task',
+  templateUrl: './register-task.component.html',
+  styleUrls: ['./register-task.component.css']
+})
+
+export class RegisterTaskComponent implements OnInit {
+  @ViewChild('formTask', { static: true }) formTask: NgForm; // ViewChild - permite termos uma referência do formulário html dentro do componente
+  task: Task;
+
+  constructor(private taskService: TaskService, private router: Router) { }
+
+  ngOnInit() {
+  	this.task = new Task(0, "", false);
+  }
+
+  create(): void {
+    if (this.formTask.form.valid) { // verifica se o formTask possui algum erro de validação, não possuir, é valido(valid) então chama o método de criar
+  	  this.taskService.create(this.task);
+  	  this.router.navigate(["/tarefas"]);
+    }
+  }
+}
+```
+
+### Implementing the Register Task - part II
+- Now, let's make a change to `list-tasks.component.html` by adding the Angular directives to the task register:
+
+``` HTML
+<h1>Cadastrar tarefa</h1>
+
+<div class="well">
+  <form #formTask="ngForm"> <!-- Vinculando o componente ao form -->
+    <div class="form-group">
+      <label for="name">Tarefa:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="task.name"
+        #name="ngModel"
+        minlength="5"
+        required> <!--
+          [(ngModel)]="task.name" - vai garantir tanto no form quanto no componente que os valores sejam os mesmos;
+          #name="ngModel" - variável local para representar esse campo de texto(input);
+        -->
+      <div *ngIf="name.errors && (name.dirty || name.touched)"
+        class="alert alert-danger"> <!-- Se possuir erros, irá exibi-los -->
+        <div [hidden]="!name.errors.required"> <!-- se o input name NÃO(!) possuir errors do tipo required irá esconder a mensagem -->
+          Digite a tarefa.
+        </div>
+        <div [hidden]="!name.errors.minlength"> <!-- Se o input name NÃO(!) possuir errors do tipo minlength irá esconder a mensagem -->
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input
+        type="submit"
+        class="btn btn-success"
+        (click)="create()"
+        value="Cadastrar"
+        [disabled]="!formTask.form.valid"> <!--
+          (click)="create()" - operador de eventos, quando o botão for clicado o evento click erá chamado e irá acionar o método create();
+          [disabled]="!formTask.form.valid" - Enquanto o formulário possuir erros de validação(!formTask.form.valid), vai ficar desabilitado o botão Cadastrar;
+        -->
+      <a [routerLink]="['/tarefas/listar']"
         class="btn btn-default">
         <span class="glyphicon glyphicon-chevron-left"
           aria-hidden="true"></span> Voltar
