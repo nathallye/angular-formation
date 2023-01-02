@@ -33,7 +33,7 @@
         (click)="create()"
         value="Cadastrar"
         [disabled]="!formTask.form.valid"> <!--
-          (click)="create()" - operador de eventos, quando o botão for clicado o evento click erá chamado e irá acionar o método create();
+          (click)="create()" - operador de eventos, quando o botão for clicado o evento click será chamado e irá acionar o método create();
           [disabled]="!formTask.form.valid" - Enquanto o formulário possuir erros de validação(!formTask.form.valid), vai ficar desabilitado o botão Cadastrar;
         -->
       <a [routerLink]="['/tarefas/listar']"

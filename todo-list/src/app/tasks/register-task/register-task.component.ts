@@ -11,10 +11,14 @@ import { Task, TaskService } from './../shared';
 })
 
 export class RegisterTaskComponent implements OnInit {
+
   @ViewChild('formTask', { static: true }) formTask: NgForm; // ViewChild - permite termos uma referência do formulário html dentro do componente
   task: Task;
 
-  constructor(private taskService: TaskService, private router: Router) { }
+  constructor(
+    private taskService: TaskService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   	this.task = new Task(0, "", false);

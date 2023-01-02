@@ -505,8 +505,6 @@ export class ListTasksComponent implements OnInit {
 }
 ```
 
-### Implementing the Task List - part II:
-
 - Now, let's make a change to `list-tasks.component.html` by adding the `*ngFor` and `ngIf` directives to the list of tasks:
 
 ``` HTML
@@ -683,7 +681,10 @@ export class RegisterTaskComponent implements OnInit {
   @ViewChild('formTask', { static: true }) formTask: NgForm; // ViewChild - permite termos uma referência do formulário html dentro do componente
   task: Task;
 
-  constructor(private taskService: TaskService, private router: Router) { }
+  constructor(
+    private taskService: TaskService, 
+    private router: Router
+  ) { }
 
   ngOnInit() {
   	this.task = new Task(0, "", false);
@@ -697,7 +698,7 @@ export class RegisterTaskComponent implements OnInit {
   }
 }
 ```
-### Implementing the Register Task - part II
+
 - Now, let's make a change to `list-tasks.component.html` by adding the Angular directives to the task register:
 
 ``` HTML
@@ -877,5 +878,90 @@ export const TasksRoutes: Routes = [
 - Once this is done, in `edit-task.component.ts` we can define the methods that will register the task:
 
 ``` TS
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Task, TaskService} from './../shared';
+
+@Component({
+  selector: 'app-edit-task',
+  templateUrl: './edit-task.component.html',
+  styleUrls: ['./edit-task.component.css']
+})
+
+export class EditTaskComponent implements OnInit {
+
+  @ViewChild('formTask', { static: true }) formTask: NgForm; // ViewChild - permite termos uma referência do formulário html dentro do componente
+  task: Task;
+
+  constructor(
+    private taskService: TaskService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+  	let id = +this.route.snapshot.params['id'];
+	  this.task = this.taskService.getOne(id);
+  }
+
+  update(): void {
+    if (this.formTask.form.valid) {
+	    this.taskService.update(this.task);
+	    this.router.navigate(['/tarefas']);
+    }
+  }
+}
+```
+
+- Now, let's make a change to `edit-task.component.html` by adding the Angular directives to the task edit:
+
+``` HTML
+<h1>Editar tarefa</h1>
+
+<div class="well">
+  <form #formTask="ngForm"> <!-- Vinculando o componente ao form -->
+    <div class="form-group">
+      <label for="name">Tarefa:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="task.name"
+        #name="ngModel"
+        minlength="5"
+        required> <!--
+          [(ngModel)]="task.name" - vai garantir tanto no form quanto no componente que os valores sejam os mesmos;
+          #name="ngModel" - variável local para representar esse campo de texto(input);
+        -->
+      <div *ngIf="name.errors && (name.dirty || name.touched)"
+        class="alert alert-danger"> <!-- Se possuir erros, irá exibi-los -->
+        <div [hidden]="!name.errors.required"> <!-- se o input name NÃO(!) possuir errors do tipo required irá esconder a mensagem -->
+          Digite a tarefa.
+        </div>
+        <div [hidden]="!name.errors.minlength"> <!-- Se o input name NÃO(!) possuir errors do tipo minlength irá esconder a mensagem -->
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input
+        type="submit"
+        class="btn btn-success"
+        (click)="update()"
+        value="Atualizar"
+        [disabled]="!formTask.form.valid"> <!--
+          (click)="update()" - operador de eventos, quando o botão for clicado o evento click será chamado e irá acionar o método update();
+          [disabled]="!formTask.form.valid" - Enquanto o formulário possuir erros de validação(!formTask.form.valid), vai ficar desabilitado o botão Cadastrar;
+        -->
+      <a [routerLink]="['/tarefas/listar']"
+        class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left"
+          aria-hidden="true"></span> Voltar
+      </a>
+    </div>
+  </form>
+</div>
 ```
