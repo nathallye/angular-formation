@@ -597,7 +597,7 @@ export const TasksRoutes: Routes = [
 
 ### Adding action to create new task button
 
-- First, let's make a change to the `list-tasks.component.html` file by adding a route redirect with the `routerLink` in the `a` element:
+- Now, let's make a change to the `list-tasks.component.html` file by adding a route redirect with the `routerLink` in the `a` element:
 
 ``` HTML
 <h1>Tarefas</h1>
@@ -697,7 +697,6 @@ export class RegisterTaskComponent implements OnInit {
   }
 }
 ```
-
 ### Implementing the Register Task - part II
 - Now, let's make a change to `list-tasks.component.html` by adding the Angular directives to the task register:
 
@@ -748,4 +747,135 @@ export class RegisterTaskComponent implements OnInit {
     </div>
   </form>
 </div>
+```
+
+### Creating the Edit Task component
+
+- The component is created using the following command:
+
+```
+$ ng g component tasks/edit-task
+
+CREATE src/app/tasks/edit-task/edit-task.component.css
+CREATE src/app/tasks/edit-task/edit-task.component.html
+CREATE src/app/tasks/edit-task/edit-task.component.spec.ts
+CREATE src/app/tasks/edit-task/edit-task.component.ts 
+UPDATE src/app/tasks/edit-task.module.ts 
+```
+
+### Registering task edition routes
+
+- In `tasks-routing.module.ts` let's add the following route:
+
+``` TS
+import { Routes } from '@angular/router';
+
+import { ListTasksComponent } from './list-tasks';
+import { RegisterTaskComponent } from './register-task';
+import { EditTaskComponent } from './edit-task';
+
+export const TasksRoutes: Routes = [
+	{ path: 'tarefas', redirectTo: 'tarefas/listar' },
+
+	{ path: 'tarefas/listar', component: ListTasksComponent },
+
+  { path: 'tarefas/cadastrar', component: RegisterTaskComponent },
+
+  { path: 'tarefas/editar/:id', component: EditTaskComponent }
+];
+```
+
+### Adding action to edit task button
+
+- Now, let's make a change to the `list-tasks.component.html` file by adding a route redirect with the `routerLink` in the `a` element:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <!--[...]-->
+      </th>
+    </tr>
+
+    <tr *ngFor="let task of tasks"> 
+      <td [class.success]="!task.completed"> 
+        {{ task.name }} 
+      </td>
+      <td style="width: 70px" class="text-center">
+        <input
+          type="checkbox"
+          [value]="task.id"
+          [checked]="task.completed">
+      </td>
+      <td class="text-center" style="width: 200px">
+        <a [routerLink]="['/tarefas/editar', task.id]"
+          title="Editar" alt="Editar"
+          class="btn btn-xs btn-info">
+          <span class="glyphicon glyphicon-pencil"
+            aria-hidden="true"></span> Editar
+        </a>
+        <a href="#" title="Remover" alt="Remover"
+          class="btn btn-xs btn-danger">
+          <span class="glyphicon glyphicon-remove"
+            aria-hidden="true"></span> Remover
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+```
+
+### Implementing the Edit Task
+
+- First, let's define the html with the bootstrap classes in `edit-task.component.html`:
+
+``` HTML
+<h1>Editar tarefa</h1>
+
+<div class="well">
+  <form>
+    <div class="form-group">
+      <label for="name">Tarefa:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        minlength="5"
+        required>
+      <div class="alert alert-danger">
+        <div>
+          Digite a tarefa.
+        </div>
+        <div>
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input
+        type="submit"
+        class="btn btn-success"
+        value="Atualizar">
+      <a
+        class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left"
+          aria-hidden="true"></span> Voltar
+      </a>
+    </div>
+  </form>
+</div>
+```
+
+- Once this is done, in `edit-task.component.ts` we can define the methods that will register the task:
+
+``` TS
+
 ```
