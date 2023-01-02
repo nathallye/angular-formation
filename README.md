@@ -363,7 +363,7 @@ CREATE src/app/tasks/list-tasks/list-tasks.component.ts
 UPDATE src/app/tasks/list-tasks.module.ts 
 ```
 
-### Registering task listing routes
+#### Registering task listing routes
 
 - In the `src/app/tasks` directory we will create the `tasks-routing.module.ts` file and in it we will define the routes related to the tasks:
 
@@ -398,7 +398,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 ```
 
-### Implementing the Task List:
+#### Implementing the Task List
 
 - First, let's define the html with the bootstrap classes in `list-tasks.component.html`:
 
@@ -574,7 +574,7 @@ CREATE src/app/tasks/register-task/register-task.component.ts
 UPDATE src/app/tasks/register-task.module.ts 
 ```
 
-### Registering task registration routes
+#### Registering task registration routes
 
 - In `tasks-routing.module.ts` let's add the following route:
 
@@ -593,7 +593,7 @@ export const TasksRoutes: Routes = [
 ];
 ```
 
-### Adding action to create new task button
+#### Adding action to create new task button
 
 - Now, let's make a change to the `list-tasks.component.html` file by adding a route redirect with the `routerLink` in the `a` element:
 
@@ -620,7 +620,7 @@ export const TasksRoutes: Routes = [
 <p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
 ```
 
-### Implementing the Register Task
+#### Implementing the Register Task
 
 - First, let's define the html with the bootstrap classes in `register-task.component.html`:
 
@@ -764,7 +764,7 @@ CREATE src/app/tasks/edit-task/edit-task.component.ts
 UPDATE src/app/tasks/edit-task.module.ts 
 ```
 
-### Registering task edition routes
+#### Registering task edition routes
 
 - In `tasks-routing.module.ts` let's add the following route:
 
@@ -786,7 +786,7 @@ export const TasksRoutes: Routes = [
 ];
 ```
 
-### Adding action to edit task button
+#### Adding action to edit task button
 
 - Now, let's make a change to the `list-tasks.component.html` file by adding a route redirect with the `routerLink` in the `a` element:
 
@@ -833,7 +833,7 @@ export const TasksRoutes: Routes = [
 <p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
 ```
 
-### Implementing the Edit Task
+#### Implementing the Edit Task
 
 - First, let's define the html with the bootstrap classes in `edit-task.component.html`:
 
@@ -965,3 +965,15 @@ export class EditTaskComponent implements OnInit {
   </form>
 </div>
 ```
+
+### Remove Task
+
+#### Implementing the Remove Task
+
+- First, let's create the update method in the `list-tasks.component.ts` file (since remove has no component of its own):uterLink` in the `a` element:
+
+``` TS
+
+```
+
+#### Adding action to remove task button
