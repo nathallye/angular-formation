@@ -973,7 +973,75 @@ export class EditTaskComponent implements OnInit {
 - First, let's create the update method in the `list-tasks.component.ts` file (since remove has no component of its own):uterLink` in the `a` element:
 
 ``` TS
+import { Component, OnInit } from '@angular/core';
 
+import { Task, TaskService } from './../shared';
+
+@Component({
+  selector: 'app-list-tasks',
+  templateUrl: './list-tasks.component.html',
+  styleUrls: ['./list-tasks.component.css']
+})
+
+export class ListTasksComponent implements OnInit {
+
+  tasks: Task[]
+
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit() { // chamado no angular logo após a inicialização do construtor
+    this.tasks = this.getAll();
+  }
+
+  getAll(): Task[] {
+    return this.taskService.getAll();
+  }
+
+  delete($event: any, task: Task): void { // $event - para evitar a atualização da página após a ação
+    $event.preventDefault(); // $event.preventDefault() - desabilita a atualização da página
+    if (confirm('Deseja remover a tarefa "' + task.name + '"?')) {
+      this.taskService.delete(task.id);
+      this.tasks = this.taskService.getAll();
+    }
+  }
+}
 ```
 
-#### Adding action to remove task button
+- Now, let's make a change in the `list-tasks.component.html` file by adding the `click` event to call the `delete` method on the `a` element:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <!--[...]-->
+      </th>
+    </tr>
+
+    <tr *ngFor="let task of tasks"> 
+      <!--[...]-->
+
+      <td class="text-center" style="width: 200px">
+        <a [routerLink]="['/tarefas/editar', task.id]"
+          title="Editar" alt="Editar"
+          class="btn btn-xs btn-info">
+          <span class="glyphicon glyphicon-pencil"
+            aria-hidden="true"></span> Editar
+        </a>
+        <a href="#" title="Remover" alt="Remover"
+          class="btn btn-xs btn-danger"
+          (click)="delete($event, task)">
+          <span class="glyphicon glyphicon-remove"
+            aria-hidden="true"></span> Remover
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+```

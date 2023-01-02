@@ -21,4 +21,12 @@ export class ListTasksComponent implements OnInit {
   getAll(): Task[] {
     return this.taskService.getAll();
   }
+
+  delete($event: any, task: Task): void { // $event - para evitar a atualização da página após a ação
+    $event.preventDefault(); // $event.preventDefault() - desabilita a atualização da página
+    if (confirm('Deseja remover a tarefa "' + task.name + '"?')) {
+      this.taskService.delete(task.id);
+      this.tasks = this.taskService.getAll();
+    }
+  }
 }
