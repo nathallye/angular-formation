@@ -22,7 +22,8 @@
         <input
           type="checkbox"
           [value]="task.id"
-          [checked]="task.completed">
+          [checked]="task.completed"
+          (click)="updateStatus(task)">
           <!--
             colchetes [] - operador de atribuição do angular;
             [value]="task.id" - nesse caso ele só está atribuindo o id da tarefa ao atributo value do input do tipo checkbox;

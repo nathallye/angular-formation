@@ -970,7 +970,7 @@ export class EditTaskComponent implements OnInit {
 
 #### Implementing the Remove Task
 
-- First, let's create the update method in the `list-tasks.component.ts` file (since remove has no component of its own):uterLink` in the `a` element:
+- First, let's create the update method in the `list-tasks.component.ts` file (since remove has no component of its own):
 
 ``` TS
 import { Component, OnInit } from '@angular/core';
@@ -1039,6 +1039,87 @@ export class ListTasksComponent implements OnInit {
             aria-hidden="true"></span> Remover
         </a>
       </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+```
+
+### Update Status Task
+
+#### Implementing the Update Status Task
+
+- First, let's create the update method in the `list-tasks.component.ts` file (since update status has no component of its own):
+
+``` TS
+import { Component, OnInit } from '@angular/core';
+
+import { Task, TaskService } from './../shared';
+
+@Component({
+  selector: 'app-list-tasks',
+  templateUrl: './list-tasks.component.html',
+  styleUrls: ['./list-tasks.component.css']
+})
+
+export class ListTasksComponent implements OnInit {
+
+  tasks: Task[]
+
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit() { // chamado no angular logo após a inicialização do construtor
+    this.tasks = this.getAll();
+  }
+
+  getAll(): Task[] {
+    return this.taskService.getAll();
+  }
+
+  delete($event: any, task: Task): void {
+    if (confirm('Deseja remover a tarefa "' + task.name + '"?')) {
+      this.taskService.delete(task.id);
+      this.tasks = this.taskService.getAll();
+    }
+  }
+
+  updateStatus(task: Task): void {
+    if (confirm('Deseja alterar o status da tarefa "' + task.name + '"?')) {
+      this.taskService.updateStatus(task.id);
+      this.tasks = this.taskService.getAll();
+    }
+  }
+}
+```
+
+- Now, let's make a change in the `list-tasks.component.html` file by adding the `click` event to call the `updateStatus` method on the `input` element:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <!--[...]-->
+      </th>
+    </tr>
+
+    <tr *ngFor="let task of tasks"> 
+      <td [class.success]="!task.completed"> 
+        {{ task.name }} 
+      </td>
+      <td style="width: 70px" class="text-center">
+        <input
+          type="checkbox"
+          [value]="task.id"
+          [checked]="task.completed"
+          (click)="updateStatus(task)">
+      </td>
+      <!--[...]-->
     </tr>
   </tbody>
 </table>

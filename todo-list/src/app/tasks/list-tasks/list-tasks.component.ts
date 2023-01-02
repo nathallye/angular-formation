@@ -29,4 +29,11 @@ export class ListTasksComponent implements OnInit {
       this.tasks = this.taskService.getAll();
     }
   }
+
+  updateStatus(task: Task): void {
+    if (confirm('Deseja alterar o status da tarefa "' + task.name + '"?')) {
+      this.taskService.updateStatus(task.id);
+      this.tasks = this.taskService.getAll();
+    }
+  }
 }
