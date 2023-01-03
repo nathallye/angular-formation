@@ -39,8 +39,6 @@ $ cd hello-world && npm start
   <img width=800" src="https://user-images.githubusercontent.com/86172286/210288939-4be8dc68-075b-4767-acbb-8894b96122d3.gif">
 </div>
 
-##
-
 - We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
 
 ```
@@ -175,6 +173,10 @@ npm install --save bootstrap@3
 ```
 
 ## PROJECT TODO LIST
+						       
+<div align="center">
+  <img width=800" src="https://user-images.githubusercontent.com/86172286/210288939-4be8dc68-075b-4767-acbb-8894b96122d3.gif">
+</div>					       
 
 - We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
 
