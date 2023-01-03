@@ -1694,11 +1694,11 @@ ul li {
 }
 
 .kz-img-x {
-  background-image: url('/assets/imagens/x.png');
+  background-image: url('/assets/img/x.png');
 }
 
 .kz-img-o {
-  background-image: url('/assets/imagens/o.png');
+  background-image: url('/assets/img/o.png');
 }
 
 .kz-cor-vitoria {
