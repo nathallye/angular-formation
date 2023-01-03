@@ -1635,7 +1635,6 @@ UPDATE src/app/hash/hash.module.ts
       </a>
     </span>
   </div><!-- fim tela final -->
-
 </div>
 ```
 
