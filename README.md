@@ -101,8 +101,10 @@ CREATE src/app/calculator/services/calculator.service.ts
 - Directives
 - Services
 - Dependency injection
-
-![image](https://user-images.githubusercontent.com/86172286/207194739-3cfaf949-21ea-4c6f-b372-38aaa63cfd1c.png)
+															     
+<div align="center">
+  <img width=800" src="https://user-images.githubusercontent.com/86172286/207194739-3cfaf949-21ea-4c6f-b372-38aaa63cfd1c.png">
+</div>																     
 
 - **Components:** An Angular application is based on components. With them, we can encapsulate interface behaviors and rules, which makes creating applications much simpler. Also, a component can encapsulate other components.
 
@@ -112,13 +114,17 @@ A component is made up of 3 items:
   - Css
   - A class that manages properties and behaviors
 
-![image](https://user-images.githubusercontent.com/86172286/207196452-2b481d99-213f-466c-b42a-131f55f7697f.png)
+<div align="center">
+  <img width=800" src="https://user-images.githubusercontent.com/86172286/207196452-2b481d99-213f-466c-b42a-131f55f7697f.png">
+</div>	
 
 - **Services:** Services are created to concentrate all the application's business rules. Each service can be used by more than one component.
 
 They are not restricted to that, but what usually happens is that we use services to encapsulate the code responsible for rules with a specific purpose, such as retrieving or submitting data in a RESTful API (backend).
 
-![image](https://user-images.githubusercontent.com/86172286/207196640-e82183ae-103a-4978-8c33-5991e9512f90.png)
+<div align="center">
+  <img width=800" src="https://user-images.githubusercontent.com/86172286/207196640-e82183ae-103a-4978-8c33-5991e9512f90.png">
+</div>
 
 With this, we can leave the components focused on managing parts of the screen that the user will see and the services focused on code with another specific purpose.
 
