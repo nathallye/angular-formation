@@ -1590,3 +1590,118 @@ CREATE src/app/hash/hash.component.spec.ts
 CREATE src/app/hash/hash.component.ts 
 UPDATE src/app/hash/hash.module.ts
 ```
+
+#### Implementing the Hash interface
+
+- Let's define the html with the css classes in `hash.component.html`:
+
+``` HTML
+<div>
+  <h2>Jogo da velha</h2>
+
+  <!-- tela inicial -->
+  <div class="principal">
+    <a href="#"
+       class="botao">
+       Iniciar
+    </a>
+  </div><!-- fim tela inicial -->
+
+  <!-- tabuleiro -->
+  <div>
+    <ul>
+      <li class="kz-border-bottom kz-border-right"></li>
+      <li class="kz-border-bottom kz-border-right"></li>
+      <li class="kz-border-bottom"></li>
+      <li class="kz-border-bottom kz-border-right"></li>
+      <li class="kz-border-bottom kz-border-right"></li>
+      <li class="kz-border-bottom"></li>
+      <li class="kz-border-right"></li>
+      <li class="kz-border-right"></li>
+      <li></li>
+    </ul>
+  </div><!-- fim tabuleiro -->
+
+  <!-- tela final -->
+  <div>
+    <span>
+    <p>Você venceu!!!</p>
+    <p>Você perdeu...</p>
+    <p>O jogo terminou empatado...</p>
+    <br />
+    <a href="#"
+         class="botao">
+         Jogar novamente
+      </a>
+    </span>
+  </div><!-- fim tela final -->
+
+</div>
+```
+
+- That done, let's define the CSS style in the `hash.component.css` file:
+
+``` CSS
+div {
+  width: 400px;
+  height: 400px;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+}
+
+div.principal {
+  margin-top: 100px;
+}
+
+a.botao {
+  background-color: lightgreen;
+  margin-top: 100px;
+  font-size: 20px;
+  padding: 15px;
+}
+
+a:link, a:visited {
+  background-color: white;
+  color: green;
+  text-decoration: none;
+  border: 4px solid green;
+}
+
+a:hover, a:active {
+  background-color: lightgreen;
+
+  color: green;
+  border: 4px solid green;
+}
+
+ul li {
+  list-style: none;
+  width: 110px;
+  height: 110px;
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  cursor: pointer;
+}
+
+.kz-border-bottom {
+  border-bottom: 8px solid #333;
+}
+
+.kz-border-right {
+  border-right: 8px solid #333;
+}
+
+.kz-img-x {
+  background-image: url('/assets/imagens/x.png');
+}
+
+.kz-img-o {
+  background-image: url('/assets/imagens/o.png');
+}
+
+.kz-cor-vitoria {
+  background-color: lightgreen;
+}
+```
