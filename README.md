@@ -617,7 +617,7 @@ export const TasksRoutes: Routes = [
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p>
 ```
 
 #### Implementing the Register Task
@@ -830,7 +830,7 @@ export const TasksRoutes: Routes = [
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> 
 ```
 
 #### Implementing the Edit Task
@@ -1043,7 +1043,7 @@ export class ListTasksComponent implements OnInit {
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> 
 ```
 
 ### Update Status Task
@@ -1124,5 +1124,82 @@ export class ListTasksComponent implements OnInit {
   </tbody>
 </table>
 
-<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> <!-- *ngIf - Diretiva do angular - essa diretiva só irá exibir o texto se o tamanho da lista for igual a 0 -->
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> 
+```
+
+### Creating a Completed Task directive
+
+- The directive is created using the following command:
+
+```
+$ ng g directive tasks/shared/task-completed
+
+CREATE src/app/tasks/shared/task-completed.directive.spec.ts
+CREATE src/app/tasks/shared/task-completed.directive.ts
+UPDATE src/app/tasks/tasks.module.ts
+```
+
+- **Obs.:** Creating a directive is the same as creating a component, the difference between a directive and a component is that a component generates an HTML tag and a directive generates an HTML attribute.
+
+#### Implementing the Completed Task directive
+
+- First, in the `list-tasks.component.ts` file let's define the following code:
+
+``` TS
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+
+@Directive({
+  selector: '[taskCompleted]'
+})
+
+export class TaskCompletedDirective implements OnInit {
+
+  @Input() taskCompleted: boolean; // receber a informação se a tarefa está concluída ou não, através do elemento HTML
+
+  constructor(private el: ElementRef) { } // ElementRef - referência do elemento HTML
+
+  ngOnInit(): void {
+    if (this.taskCompleted) { // se taskCompleted for true...
+      this.el.nativeElement.style.textDecoration = "line-through"; // aplica a marcação
+    }
+  }
+}
+```
+
+- Now, let's make a change to the `list-tasks.component.html` file by adding the `taskCompleted` directive to the `td` element:
+
+``` HTML
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody>
+    <tr>
+    	<th>Tarefa</th>
+      <th>Concluída</th>
+    	<th class="text-center">
+        <!--[...]-->
+      </th>
+    </tr>
+
+    <tr *ngFor="let task of tasks">
+      <td
+        [taskCompleted]="task.completed"
+        [class.success]="!task.completed"> 
+        {{ task.name }} 
+      </td>
+      <td style="width: 70px" class="text-center">
+        <input
+          type="checkbox"
+          [value]="task.id"
+          [checked]="task.completed"
+          (click)="updateStatus(task)">
+      </td>
+      <td class="text-center" style="width: 200px">
+        <!--[...]-->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="tasks.length==0">Nenhuma tarefa cadastrada.</p> 
 ```

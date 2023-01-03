@@ -15,7 +15,9 @@
     </tr>
 
     <tr *ngFor="let task of tasks"> <!-- *ngFor - Diretiva do angular que está dentro do pacote FormsModule - essa diretiva irá percorrer cada elemento de uma lista -->
-      <td [class.success]="!task.completed"> <!-- colchetes [] - operador de atribuição do angular, nesse caso, se a tarefa NÃO(!) estiver concluida ele vai atribuir a class success do bootstrap a esse elemento, deixando o fundo verde -->
+      <td
+        [taskCompleted]="task.completed"
+        [class.success]="!task.completed"> <!-- colchetes [] - operador de atribuição do angular, nesse caso, se a tarefa NÃO(!) estiver concluida ele vai atribuir a class success do bootstrap a esse elemento, deixando o fundo verde -->
         {{ task.name }} <!-- chaves duplas {} - exibe os valores de dentro das variáveis -->
       </td>
       <td style="width: 70px" class="text-center">
