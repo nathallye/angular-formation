@@ -39,6 +39,61 @@ $ cd calculator && ng serve
 $ cd calculator && npm start
 ```
 
+### Important!
+
+Angular in its latest version enables by default the **strict mode(strict)** and **noPropertyAccessFromIndexSignature** of Typescript, and this mode generates some incompatibilities with the code created here because it makes many restrictions on the creation of objects.
+
+To avoid compilation errors due to restricted mode, it is recommended to disable it in the project.
+
+To disable **strict** mode and **noPropertyAccessFromIndexSignature** in Angular, edit the `tsconfig.json` file, located at the root of the project, and change the following lines from:
+
+``` JSON
+"strict": true,
+"noPropertyAccessFromIndexSignature": true
+```
+
+For:
+
+``` JSON
+"strict": false,
+"noPropertyAccessFromIndexSignature": false
+```
+
+### Installing bootstrap
+
+- Bootstrap installation can be done with the following command:
+
+```
+npm install --save bootstrap@3
+```
+
+- And the Bootstrap CSS file should be added with the following structure to the `angular.json` file:
+
+``` JSON
+"styles": [
+  "src/styles.css",
+  "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+```
+
+- Another option is to import the bootstrap directly into the `index.html` file:
+
+``` HTML
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Gerenciador de Tarefas</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+```
+
 ### Creating the Calculator module
 
 - The module is created using the following command:
@@ -119,38 +174,3 @@ Angular implements a dependency injection mechanism and runs it at application s
 
 It is possible to create modules that group components, services and other elements by some similarity.
 
-### Important!
-
-Angular in its latest version enables by default the **strict mode(strict)** and **noPropertyAccessFromIndexSignature** of Typescript, and this mode generates some incompatibilities with the code created here because it makes many restrictions on the creation of objects.
-
-To avoid compilation errors due to restricted mode, it is recommended to disable it in the project.
-
-To disable **strict** mode and **noPropertyAccessFromIndexSignature** in Angular, edit the `tsconfig.json` file, located at the root of the project, and change the following lines from:
-
-``` JSON
-"strict": true,
-"noPropertyAccessFromIndexSignature": true
-```
-
-For:
-
-``` JSON
-"strict": false,
-"noPropertyAccessFromIndexSignature": false
-```
-
-### Installing bootstrap
-
-- Bootstrap installation can be done with the following command:
-
-```
-npm install --save bootstrap@3
-```
-
-- And the Bootstrap CSS file should be added with the following structure to the `angular.json` file:
-
-``` JSON
-"styles": [
-  "src/styles.css",
-  "./node_modules/bootstrap/dist/css/bootstrap.min.css"
-```
