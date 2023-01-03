@@ -1260,3 +1260,44 @@ For:
 "strict": false,
 "noPropertyAccessFromIndexSignature": false
 ```
+
+### Creating the Hash module
+
+- The module is created using the following command:
+
+```
+$ ng g module hash
+
+CREATE src/app/hash/hash.module.ts
+```
+
+### Creating the Task service
+
+- The service is created using the following command:
+
+```
+$ ng g service hash/shared/hash
+
+CREATE src/app/hash/shared/hash.service.spec.ts 
+CREATE src/app/hash/shared/hash.service.ts 
+```
+
+- In `hash.service.ts` we will define the methods of this service:
+
+``` TS
+
+```
+
+### Creating the Hash component
+
+- The component is created using the following command:
+
+```
+$ ng g component hash
+
+CREATE src/app/hash/hash.component.css
+CREATE src/app/hash/hash.component.html
+CREATE src/app/hash/hash.component.spec.ts
+CREATE src/app/hash/hash.component.ts 
+UPDATE src/app/hash/hash.module.ts
+```
