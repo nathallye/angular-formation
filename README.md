@@ -1874,3 +1874,190 @@ export class HashComponent implements OnInit {
   </div><!-- fim tela final -->
 </div>
 ```
+
+#### Implementing Hash board screen
+
+- Let's use the square brackets [] - assignment operators - to assign classes dynamically (two classes that contain the background with the images of X or O and another class that applies the victory color) and also the `click` event to call the `play()` method passing the positions in the `li` elements of the list:
+
+``` HTML
+<div>
+  <h2>Jogo da velha</h2>
+
+  <!-- tela inicial -->
+  <div class="principal" *ngIf="showStart"> <!-- Irá exibir a tela principal, caso o showStart seja true -->
+    <a href="#"
+      class="botao"
+      (click)="startGame()"> <!-- Evento click quando acionado irá chamar o método startGame() definido no component -->
+      Iniciar
+    </a>
+  </div><!-- fim tela inicial -->
+
+  <!-- tabuleiro -->
+  <div *ngIf="showBoard"> <!-- Irá exibir o tabuleiro, caso o showBoard seja true -->
+    <ul>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(0, 0)"
+        [class.kz-img-o]="showO(0, 0)"
+        [class.kz-cor-vitoria]="showVictory(0, 0)"
+        (click)="play(0, 0)">
+      </li>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(0, 1)"
+        [class.kz-img-o]="showO(0, 1)"
+        [class.kz-cor-vitoria]="showVictory(0, 1)"
+        (click)="play(0, 1)">
+      </li>
+      <li class="kz-border-bottom"
+        [class.kz-img-x]="showX(0, 2)"
+        [class.kz-img-o]="showO(0, 2)"
+        [class.kz-cor-vitoria]="showVictory(0, 2)"
+        (click)="play(0, 2)">
+      </li>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(1, 0)"
+        [class.kz-img-o]="showO(1, 0)"
+        [class.kz-cor-vitoria]="showVictory(1, 0)"
+        (click)="play(1, 0)">
+      </li>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(1, 1)"
+        [class.kz-img-o]="showO(1, 1)"
+        [class.kz-cor-vitoria]="showVictory(1, 1)"
+        (click)="play(1, 1)">
+      </li>
+      <li class="kz-border-bottom"
+        [class.kz-img-x]="showX(1, 2)"
+        [class.kz-img-o]="showO(1, 2)"
+        [class.kz-cor-vitoria]="showVictory(1, 2)"
+        (click)="play(1, 2)">
+      </li>
+      <li class="kz-border-right"
+        [class.kz-img-x]="showX(2, 0)"
+        [class.kz-img-o]="showO(2, 0)"
+        [class.kz-cor-vitoria]="showVictory(2, 0)"
+        (click)="play(2, 0)">
+      </li>
+      <li class="kz-border-right"
+        [class.kz-img-x]="showX(2, 1)"
+        [class.kz-img-o]="showO(2, 1)"
+        [class.kz-cor-vitoria]="showVictory(2, 1)"
+        (click)="play(2, 1)">
+      </li>
+      <li
+        [class.kz-img-x]="showX(2, 2)"
+        [class.kz-img-o]="showO(2, 2)"
+        [class.kz-cor-vitoria]="showVictory(2, 2)"
+        (click)="play(2, 2)">
+      </li>
+    </ul>
+  </div><!-- fim tabuleiro -->
+
+  <!-- tela final -->
+  <div *ngIf="showFinal"> <!-- Irá exibir a tela final, caso o showFinal seja true -->
+    <span>
+      <p>Você venceu!!!</p>
+      <p>Você perdeu...</p>
+      <p>O jogo terminou empatado...</p>
+      <br />
+      <a href="#"
+        class="botao">
+        Jogar novamente
+      </a>
+    </span>
+  </div><!-- fim tela final -->
+</div>
+```
+
+#### Implementing Hash final screen
+
+- Let's use angular's `*ngIf` directive to check which player won and display the correct message and add the `click` action on the `a` element (new game) by calling the ``newGame()` method:
+
+``` HTML
+<div>
+  <h2>Jogo da velha</h2>
+
+  <!-- tela inicial -->
+  <div class="principal" *ngIf="showStart"> <!-- Irá exibir a tela principal, caso o showStart seja true -->
+    <a href="#"
+      class="botao"
+      (click)="startGame()"> <!-- Evento click quando acionado irá chamar o método startGame() definido no component -->
+      Iniciar
+    </a>
+  </div><!-- fim tela inicial -->
+
+  <!-- tabuleiro -->
+  <div *ngIf="showBoard"> <!-- Irá exibir o tabuleiro, caso o showBoard seja true -->
+    <ul>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(0, 0)"
+        [class.kz-img-o]="showO(0, 0)"
+        [class.kz-cor-vitoria]="showVictory(0, 0)"
+        (click)="play(0, 0)">
+      </li>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(0, 1)"
+        [class.kz-img-o]="showO(0, 1)"
+        [class.kz-cor-vitoria]="showVictory(0, 1)"
+        (click)="play(0, 1)">
+      </li>
+      <li class="kz-border-bottom"
+        [class.kz-img-x]="showX(0, 2)"
+        [class.kz-img-o]="showO(0, 2)"
+        [class.kz-cor-vitoria]="showVictory(0, 2)"
+        (click)="play(0, 2)">
+      </li>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(1, 0)"
+        [class.kz-img-o]="showO(1, 0)"
+        [class.kz-cor-vitoria]="showVictory(1, 0)"
+        (click)="play(1, 0)">
+      </li>
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-x]="showX(1, 1)"
+        [class.kz-img-o]="showO(1, 1)"
+        [class.kz-cor-vitoria]="showVictory(1, 1)"
+        (click)="play(1, 1)">
+      </li>
+      <li class="kz-border-bottom"
+        [class.kz-img-x]="showX(1, 2)"
+        [class.kz-img-o]="showO(1, 2)"
+        [class.kz-cor-vitoria]="showVictory(1, 2)"
+        (click)="play(1, 2)">
+      </li>
+      <li class="kz-border-right"
+        [class.kz-img-x]="showX(2, 0)"
+        [class.kz-img-o]="showO(2, 0)"
+        [class.kz-cor-vitoria]="showVictory(2, 0)"
+        (click)="play(2, 0)">
+      </li>
+      <li class="kz-border-right"
+        [class.kz-img-x]="showX(2, 1)"
+        [class.kz-img-o]="showO(2, 1)"
+        [class.kz-cor-vitoria]="showVictory(2, 1)"
+        (click)="play(2, 1)">
+      </li>
+      <li
+        [class.kz-img-x]="showX(2, 2)"
+        [class.kz-img-o]="showO(2, 2)"
+        [class.kz-cor-vitoria]="showVictory(2, 2)"
+        (click)="play(2, 2)">
+      </li>
+    </ul>
+  </div><!-- fim tabuleiro -->
+
+  <!-- tela final -->
+  <div *ngIf="showFinal"> <!-- Irá exibir a tela final, caso o showFinal seja true -->
+    <span>
+      <p *ngIf="player===2">Você venceu!!!</p>
+      <p *ngIf="player===1">Você perdeu...</p>
+      <p *ngIf="player===0">O jogo terminou empatado...</p>
+      <br />
+      <a href="#"
+        class="botao"
+        (click)="newGame()">
+        Jogar novamente
+      </a>
+    </span>
+  </div><!-- fim tela final -->
+</div>
+```
