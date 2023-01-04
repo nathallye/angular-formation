@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HashComponent } from './hash.component';
-import { HashService } from './shared';
+import { DashboardComponent } from './dashboard.component';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
-    HashComponent
+    DashboardComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    HashComponent
+    DashboardComponent
   ],
   providers: [
-    HashService
+    DataService
   ]
 })
 
-export class HashModule { }
+export class DashboardModule { }

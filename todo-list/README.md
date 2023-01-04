@@ -120,6 +120,20 @@ export class Task {
 }
 ```
 
+### Creating the List Tasks component
+
+- The component is created using the following command:
+
+```
+$ ng g component tasks/list-tasks
+
+CREATE src/app/tasks/list-tasks/list-tasks.component.css
+CREATE src/app/tasks/list-tasks/list-tasks.component.html
+CREATE src/app/tasks/list-tasks/list-tasks.component.spec.ts
+CREATE src/app/tasks/list-tasks/list-tasks.component.ts 
+UPDATE src/app/tasks/list-tasks.module.ts 
+```
+
 ### Creating the Task service
 
 - The service is created using the following command:
@@ -199,20 +213,6 @@ export class TaskService {
     localStorage['tarefas'] = JSON.stringify(tasks);
   }
 }
-```
-
-### Creating the List Tasks component
-
-- The component is created using the following command:
-
-```
-$ ng g component tasks/list-tasks
-
-CREATE src/app/tasks/list-tasks/list-tasks.component.css
-CREATE src/app/tasks/list-tasks/list-tasks.component.html
-CREATE src/app/tasks/list-tasks/list-tasks.component.spec.ts
-CREATE src/app/tasks/list-tasks/list-tasks.component.ts 
-UPDATE src/app/tasks/list-tasks.module.ts 
 ```
 
 #### Registering task listing routes

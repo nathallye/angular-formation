@@ -47,6 +47,20 @@ $ ng g module hash
 CREATE src/app/hash/hash.module.ts
 ```
 
+### Creating the Hash component
+
+- The component is created using the following command:
+
+```
+$ ng g component hash
+
+CREATE src/app/hash/hash.component.css
+CREATE src/app/hash/hash.component.html
+CREATE src/app/hash/hash.component.spec.ts
+CREATE src/app/hash/hash.component.ts 
+UPDATE src/app/hash/hash.module.ts
+```
+
 ### Creating the Hash service
 
 - The service is created using the following command:
@@ -351,20 +365,6 @@ export class HashService {
     this._showBoard = true;
   }
 }
-```
-
-### Creating the Hash component
-
-- The component is created using the following command:
-
-```
-$ ng g component hash
-
-CREATE src/app/hash/hash.component.css
-CREATE src/app/hash/hash.component.html
-CREATE src/app/hash/hash.component.spec.ts
-CREATE src/app/hash/hash.component.ts 
-UPDATE src/app/hash/hash.module.ts
 ```
 
 #### Implementing the Hash interface

@@ -286,6 +286,20 @@ export class Task {
 }
 ```
 
+### Creating the List Tasks component
+
+- The component is created using the following command:
+
+```
+$ ng g component tasks/list-tasks
+
+CREATE src/app/tasks/list-tasks/list-tasks.component.css
+CREATE src/app/tasks/list-tasks/list-tasks.component.html
+CREATE src/app/tasks/list-tasks/list-tasks.component.spec.ts
+CREATE src/app/tasks/list-tasks/list-tasks.component.ts 
+UPDATE src/app/tasks/list-tasks.module.ts 
+```
+
 ### Creating the Task service
 
 - The service is created using the following command:
@@ -365,20 +379,6 @@ export class TaskService {
     localStorage['tarefas'] = JSON.stringify(tasks);
   }
 }
-```
-
-### Creating the List Tasks component
-
-- The component is created using the following command:
-
-```
-$ ng g component tasks/list-tasks
-
-CREATE src/app/tasks/list-tasks/list-tasks.component.css
-CREATE src/app/tasks/list-tasks/list-tasks.component.html
-CREATE src/app/tasks/list-tasks/list-tasks.component.spec.ts
-CREATE src/app/tasks/list-tasks/list-tasks.component.ts 
-UPDATE src/app/tasks/list-tasks.module.ts 
 ```
 
 #### Registering task listing routes
@@ -1271,6 +1271,20 @@ $ ng g module hash
 CREATE src/app/hash/hash.module.ts
 ```
 
+### Creating the Hash component
+
+- The component is created using the following command:
+
+```
+$ ng g component hash
+
+CREATE src/app/hash/hash.component.css
+CREATE src/app/hash/hash.component.html
+CREATE src/app/hash/hash.component.spec.ts
+CREATE src/app/hash/hash.component.ts 
+UPDATE src/app/hash/hash.module.ts
+```
+
 ### Creating the Hash service
 
 - The service is created using the following command:
@@ -1575,20 +1589,6 @@ export class HashService {
     this._showBoard = true;
   }
 }
-```
-
-### Creating the Hash component
-
-- The component is created using the following command:
-
-```
-$ ng g component hash
-
-CREATE src/app/hash/hash.component.css
-CREATE src/app/hash/hash.component.html
-CREATE src/app/hash/hash.component.spec.ts
-CREATE src/app/hash/hash.component.ts 
-UPDATE src/app/hash/hash.module.ts
 ```
 
 #### Implementing the Hash interface
@@ -2061,3 +2061,79 @@ export class HashComponent implements OnInit {
   </div><!-- fim tela final -->
 </div>
 ```
+
+## PROJECT DASHBOARD
+
+- We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
+
+```
+$ ng new dashboard
+         [project-name]
+```
+
+- Run the application:
+
+```
+$ cd dashboard && ng serve
+
+// or 
+
+$ cd dashboard && npm start
+```
+
+### Important!
+
+Angular in its latest version enables by default the **strict mode(strict)** and **noPropertyAccessFromIndexSignature** of Typescript, and this mode generates some incompatibilities with the code created here because it makes many restrictions on the creation of objects.
+
+To avoid compilation errors due to restricted mode, it is recommended to disable it in the project.
+
+To disable **strict** mode and **noPropertyAccessFromIndexSignature** in Angular, edit the `tsconfig.json` file, located at the root of the project, and change the following lines from:
+
+``` JSON
+"strict": true,
+"noPropertyAccessFromIndexSignature": true
+```
+
+For:
+
+``` JSON
+"strict": false,
+"noPropertyAccessFromIndexSignature": false
+```
+
+### Creating the Dashboard module
+
+- The module is created using the following command:
+
+```
+$ ng g module dashboard
+
+CREATE src/app/dashboard/dashboard.module.ts
+```
+
+### Creating the Dashboard component
+
+- The component is created using the following command:
+
+```
+$ ng g component dashboard
+
+CREATE src/app/dashboard/dashboard.component.css
+CREATE src/app/dashboard/dashboard.component.html
+CREATE src/app/dashboard/dashboard.component.spec.ts
+CREATE src/app/dashboard/dashboard.component.ts 
+UPDATE src/app/dashboard/dashboard.module.ts
+```
+
+### Creating the Dashboard(Data) service
+
+- The service is created using the following command:
+
+```
+$ ng g service dashboard/data
+
+CREATE src/app/dashboard/data.service.spec.ts 
+CREATE src/app/dashboard/data.service.ts 
+```
+
+- In `dashboard.service.ts` we will define the methods of this service:
