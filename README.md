@@ -1224,6 +1224,12 @@ export class TaskCompletedDirective implements OnInit {
 
 ## PROJECT HASH
 
+<div align="center">
+  <img width="800" src="https://user-images.githubusercontent.com/86172286/210481447-925b89d1-c55c-4414-b72e-24ae42481c29.gif">
+</div>
+
+##
+
 - We use the `ng new` command to create a new project in Angular. When executing this command, a new folder will be created containing a directory structure with the necessary files to start a project in this framework:
 
 ```
