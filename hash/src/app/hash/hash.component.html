@@ -2,15 +2,16 @@
   <h2>Jogo da velha</h2>
 
   <!-- tela inicial -->
-  <div class="principal">
+  <div class="principal" *ngIf="showStart"> <!-- Irá exibir a tela principal, caso o showStart seja true -->
     <a href="#"
-       class="botao">
-       Iniciar
+      class="botao"
+      (click)="startGame()"> <!-- Evento click quando acionado irá chamar o método startGame() definido no component -->
+      Iniciar
     </a>
   </div><!-- fim tela inicial -->
 
   <!-- tabuleiro -->
-  <div>
+  <div *ngIf="showBoard"> <!-- Irá exibir o tabuleiro, caso o showBoard seja true -->
     <ul>
       <li class="kz-border-bottom kz-border-right kz-img-x"></li>
       <li class="kz-border-bottom kz-border-right kz-img-o"></li>
@@ -25,15 +26,15 @@
   </div><!-- fim tabuleiro -->
 
   <!-- tela final -->
-  <div>
+  <div *ngIf="showFinal"> <!-- Irá exibir a tela final, caso o showFinal seja true -->
     <span>
-    <p>Você venceu!!!</p>
-    <p>Você perdeu...</p>
-    <p>O jogo terminou empatado...</p>
-    <br />
-    <a href="#"
-         class="botao">
-         Jogar novamente
+      <p>Você venceu!!!</p>
+      <p>Você perdeu...</p>
+      <p>O jogo terminou empatado...</p>
+      <br />
+      <a href="#"
+        class="botao">
+        Jogar novamente
       </a>
     </span>
   </div><!-- fim tela final -->

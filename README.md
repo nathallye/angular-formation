@@ -1602,8 +1602,8 @@ UPDATE src/app/hash/hash.module.ts
   <!-- tela inicial -->
   <div class="principal">
     <a href="#"
-       class="botao">
-       Iniciar
+      class="botao">
+      Iniciar
     </a>
   </div><!-- fim tela inicial -->
 
@@ -1625,13 +1625,13 @@ UPDATE src/app/hash/hash.module.ts
   <!-- tela final -->
   <div>
     <span>
-    <p>Você venceu!!!</p>
-    <p>Você perdeu...</p>
-    <p>O jogo terminou empatado...</p>
-    <br />
-    <a href="#"
-         class="botao">
-         Jogar novamente
+      <p>Você venceu!!!</p>
+      <p>Você perdeu...</p>
+      <p>O jogo terminou empatado...</p>
+      <br />
+      <a href="#"
+        class="botao">
+        Jogar novamente
       </a>
     </span>
   </div><!-- fim tela final -->
@@ -1703,4 +1703,174 @@ ul li {
 .kz-cor-vitoria {
   background-color: lightgreen;
 }
+```
+
+#### Implementing Hash inital screen
+
+- First, in `hash.component.html`, let's import the hash service and inject it into the constructor. Next, let's create the methods:
+
+``` TS
+import { Component, OnInit } from '@angular/core';
+
+import { HashService } from './shared';
+
+@Component({
+  selector: 'app-hash',
+  templateUrl: './hash.component.html',
+  styleUrls: ['./hash.component.css']
+})
+
+export class HashComponent implements OnInit {
+  // injetamos o service no component, e definimos métodos retornando os criados no service para que fiquem acessíveis 
+
+  constructor(private hashService: HashService) { }
+
+  ngOnInit() {
+  	this.hashService.initialize();
+  }
+
+  /**
+  * Retorna se a tela de início deve ser exibida.
+  *
+  * @return boolean
+  */
+  get showStart(): boolean {
+  	return this.hashService.showStart;
+  }
+
+  /**
+  * Retorna se o tabuleiro deve ser exibido.
+  *
+  * @return boolean
+  */
+  get showBoard(): boolean {
+  	return this.hashService.showBoard;
+  }
+
+  /**
+  * Retorna se a tela de fim de jogo deve ser exibida.
+  *
+  * @return boolean
+  */
+  get showFinal(): boolean {
+  	return this.hashService.showFinal;
+  }
+
+  /**
+  * Retorna o número do jogador a jogar.
+  *
+  * @return number
+  */
+  get player(): number {
+  	return this.hashService.player;
+  }
+
+  /**
+  * Inicializa os dados de um novo jogo.
+  *
+  * @return void
+  */
+  startGame(): void {
+  	this.hashService.startGame();
+  }
+
+  /**
+  * Realiza uma jogada ao clicar um local no tabuleiro.
+  *
+  * @param number posX
+  * @param number posY
+  * @return void
+  */
+  play(posX: number, posY: number): void {
+  	this.hashService.play(posX, posY);
+  }
+
+  /**
+  * Retorna se a peça X deve ser exibida para a coordena informada.
+  *
+  * @param number posX
+  * @param number posY
+  * @return boolean
+  */
+  showX(posX: number, posY: number): boolean {
+  	return this.hashService.showX(posX, posY);
+  }
+
+  /**
+  * Retorna se a peça O deve ser exibida para a coordena informada.
+  *
+  * @param number posX
+  * @param number posY
+  * @return boolean
+  */
+  showO(posX: number, posY: number): boolean {
+  	return this.hashService.showO(posX, posY);
+  }
+
+  /**
+  * Retorna se a marcação de vitória deve ser exibida para a coordena informada.
+  *
+  * @param number posX
+  * @param number posY
+  * @return boolean
+  */
+   showVictory(posX: number, posY: number): boolean {
+  	return this.hashService.showVictory(posX, posY);
+  }
+
+  /**
+  * Inicia um novo jogo.
+  *
+  * @return void
+  */
+  newGame(): void {
+  	this.hashService.newGame();
+  }
+}
+```
+
+- Once that's done, let's go to `hash.component.html` and define the conditional rendering of the screens with `*ngIf` and add the `click` action on the start game button by calling the `startGame` method:
+
+``` HTML
+<div>
+  <h2>Jogo da velha</h2>
+
+  <!-- tela inicial -->
+  <div class="principal" *ngIf="showStart"> <!-- Irá exibir a tela principal, caso o showStart seja true -->
+    <a href="#"
+      class="botao"
+      (click)="startGame()"> <!-- Evento click quando acionado irá chamar o método startGame() definido no component -->
+      Iniciar
+    </a>
+  </div><!-- fim tela inicial -->
+
+  <!-- tabuleiro -->
+  <div *ngIf="showBoard"> <!-- Irá exibir o tabuleiro, caso o showBoard seja true -->
+    <ul>
+      <li class="kz-border-bottom kz-border-right kz-img-x"></li>
+      <li class="kz-border-bottom kz-border-right kz-img-o"></li>
+      <li class="kz-border-bottom"></li>
+      <li class="kz-border-bottom kz-border-right"></li>
+      <li class="kz-border-bottom kz-border-right"></li>
+      <li class="kz-border-bottom"></li>
+      <li class="kz-border-right"></li>
+      <li class="kz-border-right"></li>
+      <li></li>
+    </ul>
+  </div><!-- fim tabuleiro -->
+
+  <!-- tela final -->
+  <div *ngIf="showFinal"> <!-- Irá exibir a tela final, caso o showFinal seja true -->
+    <span>
+      <p>Você venceu!!!</p>
+      <p>Você perdeu...</p>
+      <p>O jogo terminou empatado...</p>
+      <br />
+      <a href="#"
+        class="botao">
+        Jogar novamente
+      </a>
+    </span>
+  </div><!-- fim tela final -->
+</div>
 ```
