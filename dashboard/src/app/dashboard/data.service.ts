@@ -23,6 +23,7 @@ export class DataService {
 	*
 	* @return Observable<any>
 	*/
+  // Um Observer permite que dados sejam retornados de modo assíncrono, ou seja, assim que eles seja obtidos por uma chamada externa.
 	getData(): Observable<any> {
 		return new Observable(observable => { // criamos a instância do Observable e usamos a referência(observable) que ele disponibiliza para manipulação
 			observable.next(this.data); // e o next já notifica todos os inscritos que estão na escuta(retornando os dados)
