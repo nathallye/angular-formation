@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HashComponent } from './hash.component';
+import { HashService } from './shared';
 
 describe('HashComponent', () => {
   let component: HashComponent;
@@ -8,7 +9,12 @@ describe('HashComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HashComponent ]
+      declarations: [
+        HashComponent
+      ],
+      providers: [
+        HashService
+      ]
     })
     .compileComponents();
 
